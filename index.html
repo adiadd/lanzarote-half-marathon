@@ -27,7 +27,7 @@ body.race-week #today,body.race-week #weeks{display:none}
 .progress-wrap{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--bg) 93%,transparent);padding:12px 2px 14px}
 .progress-label{display:flex;justify-content:space-between;align-items:baseline;font-weight:500;font-size:13px;margin-bottom:10px}.progress-label span:last-child{color:var(--lava);font-weight:700;font-size:15px}
 .route{position:relative;height:26px}.route-track{position:absolute;left:0;right:0;top:11px;height:3px;border-radius:2px;background:var(--line)}.route-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;background:linear-gradient(90deg,var(--teal),var(--lava));transition:width .3s}
-.route-marker{position:absolute;top:13px;left:0;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;background:var(--bg);border:3px solid var(--lava);transition:left .3s;box-shadow:0 0 0 3px #0b0f0e}
+.route-marker{position:absolute;top:50%;left:0;width:15px;height:15px;transform:translate(-50%,-50%);border-radius:50%;background:var(--bg);border:3px solid var(--lava);transition:left .3s;box-shadow:0 0 0 3px #0b0f0e}
 .route-ends{display:flex;justify-content:space-between;color:var(--faint);font-size:11px;margin-top:4px}.route-ends span:nth-child(2){color:var(--muted)}
 .sync{font-size:11.5px;color:var(--faint);margin-top:7px;text-align:right}
 .sync a{color:var(--teal);text-decoration:none}.sync a:hover{text-decoration:underline}
@@ -41,7 +41,7 @@ body.race-week #today,body.race-week #weeks{display:none}
 .tag{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lava);border:1px solid #ff7a1a55;padding:4px 8px;border-radius:99px;white-space:nowrap}
 .sessions{margin-top:10px}
 .session{display:grid;grid-template-columns:40px 1fr 44px;gap:10px;align-items:center;padding:13px 0;border-top:1px solid #1a241f;min-height:66px}
-.day{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
+.day{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}.day-date{display:block;margin-top:2px;font-size:10px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--faint);white-space:nowrap}
 .name{font-weight:700}.run .name{color:var(--teal)}.long .name{color:#8fd8cf}
 .race-day .name{color:var(--lava);font-size:17px}
 .details{color:var(--muted);font-size:12.5px;margin-top:2px}
@@ -101,7 +101,8 @@ Object.assign({id:`w${n}-fri`,day:'Fri'},fri),
 race?{id:`w${n}-sat`,day:'Sat',name:'13.1 mi · RACE DAY',detail:'Saturday, Dec 5 at 10:30 AM. First three miles should feel too easy.',kind:'long race-day',miles:13.1}:{id:`w${n}-sat`,day:'Sat',name:'Basketball',detail:'Morning hoops. Keep it chill, hydrate hard, and save your legs for Sunday.'},
 race?{id:`w${n}-sun`,day:'Sun',name:'Rest · feet up',detail:'You raced yesterday. Walk, eat, sleep.',rest:true}:{id:`w${n}-sun`,day:'Sun',name:`${long} mi · Long run`,detail:'All easy, slower than you think. This is the session that carries the plan.',kind:'long',miles:long}]}
 function allSessions(){const m=new Map();for(let n=1;n<=14;n++)sessionsForWeek(n).forEach((s,i)=>{s.date=weekStart(n);s.date.setDate(s.date.getDate()+i);m.set(s.id,s)});return m}
-function sessHTML(s){return `<div class="session ${s.kind||''} ${s.list&&s.list.length?'lift':''}" data-id="${s.id}"><div class="day">${s.day}</div><div class="copy"><div class="name">${s.name}</div><div class="details">${s.detail}</div>${s.list&&s.list.length?`<button class="expand">show exercises</button><div class="lift-list">${s.list.map(x=>`<div><span>${x[0]}</span><span>${x[1]}</span></div>`).join('')}</div>`:''}</div><input class="check" type="checkbox" aria-label="mark ${s.day} complete"></div>`}
+function sessionDate(s){const m=s.id.match(/^w(\d+)-(mon|tue|wed|thu|fri|sat|sun)$/);if(!m)return '';const d=weekStart(+m[1]);d.setDate(d.getDate()+DAYS.indexOf(m[2]));return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}
+function sessHTML(s){return `<div class="session ${s.kind||''} ${s.list&&s.list.length?'lift':''}" data-id="${s.id}"><div class="day">${s.day}<span class="day-date">${sessionDate(s)}</span></div><div class="copy"><div class="name">${s.name}</div><div class="details">${s.detail}</div>${s.list&&s.list.length?`<button class="expand">show exercises</button><div class="lift-list">${s.list.map(x=>`<div><span>${x[0]}</span><span>${x[1]}</span></div>`).join('')}</div>`:''}</div><input class="check" type="checkbox" aria-label="mark ${s.day} complete"></div>`}
 function wireSessions(root){root.querySelectorAll('.session').forEach(el=>{const cb=el.querySelector('.check');cb.checked=done.has(el.dataset.id);cb.onchange=()=>{toggle(el.dataset.id,cb.checked)};el.querySelector('.expand')?.addEventListener('click',e=>{el.classList.toggle('open');e.target.textContent=el.classList.contains('open')?'hide exercises':'show exercises'})})}
 function toggle(id,on){on?done.add(id):done.delete(id);document.querySelectorAll(`.session[data-id="${id}"] .check`).forEach(c=>c.checked=on);renderToday();update();queueSave()}
 function paceStatus(now){const wn=weekOf(now);if(wn<1)return{cls:'pace-on',html:'Plan starts <b>Monday, Aug 31</b>'};if(wn>14)return null;
