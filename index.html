@@ -1,17 +1,37 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b0f0e"><title>Lanzarote 13.1</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"><style>
 :root{--bg:#0b0f0e;--panel:#111815;--line:#243129;--ink:#f2ede1;--muted:#93a29b;--faint:#5f7169;--lava:#ff7a1a;--teal:#46b4a7;--green:#4fd697}
-*{box-sizing:border-box}html{background:var(--bg);color-scheme:dark}body{margin:0;background:linear-gradient(180deg,#0d1412 0,var(--bg) 26rem);color:var(--ink);font:15px/1.55 "Space Grotesk",ui-sans-serif,system-ui,sans-serif;min-height:100vh}main{max-width:640px;margin:auto;padding:20px 16px 80px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html{background:var(--bg);color-scheme:dark}body{margin:0;background:linear-gradient(180deg,#0d1412 0,var(--bg) 26rem);color:var(--ink);font:15px/1.55 "Space Grotesk",ui-sans-serif,system-ui,sans-serif;min-height:100vh}main{max-width:640px;margin:auto;padding:20px 16px 80px}
 header{padding:26px 2px 6px;border-bottom:1px solid var(--line)}
 .meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:12.5px;padding-bottom:14px}.meta b{color:var(--ink);font-weight:500}
 .hero{font-size:54px;line-height:.92;margin:18px 0 14px;font-weight:700;letter-spacing:-.045em}.hero em{font-style:normal;color:var(--lava)}
 .sub{color:var(--muted);margin:0 0 20px;font-size:14.5px;max-width:34ch}
 .count{display:flex;align-items:baseline;gap:10px;padding:12px 0 18px;border-top:1px dashed var(--line)}.count b{font-size:34px;font-weight:700;letter-spacing:-.03em;color:var(--teal)}.count span{color:var(--muted);font-size:13px}
+.today{margin:18px 0 6px;padding:16px 16px 14px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.today .t-label{display:flex;justify-content:space-between;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--faint)}
+.today .t-row{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:8px}
+.today .t-name{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.today .t-name.run{color:var(--teal)}.today .t-name.long{color:#8fd8cf}.today .t-name.race{color:var(--lava)}
+.today .t-detail{color:var(--muted);font-size:13px;margin-top:3px;max-width:38ch}
+.today .check{flex:none;width:44px;height:44px}
+.today .pace{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)}
+.today .pace b{font-weight:700}.pace-on b{color:var(--teal)}.pace-ahead b{color:var(--green)}.pace-behind b{color:var(--lava)}
+.raceweek{display:none;margin:18px 0 6px;padding:18px 16px 16px;border:1px solid #ff7a1a44;border-radius:14px;background:var(--panel)}
+body.race-week .raceweek{display:block}
+body.race-week #today,body.race-week #weeks{display:none}
+.raceweek .rw-label{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lava)}
+.rw-count{display:flex;gap:16px;margin:12px 0 4px}
+.rw-count div{text-align:center}.rw-count b{display:block;font-size:34px;font-weight:700;letter-spacing:-.03em;color:var(--teal);font-variant-numeric:tabular-nums}.rw-count span{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.raceweek .rw-sub{color:var(--muted);font-size:12.5px;margin:6px 0 0}
+.raceweek h3{font-size:13px;font-weight:700;letter-spacing:.04em;margin:18px 0 2px;color:var(--ink)}
+.raceweek .session{padding:11px 0;min-height:54px}
 .progress-wrap{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--bg) 78%,transparent);padding:12px 2px 14px}
 .progress-label{display:flex;justify-content:space-between;align-items:baseline;font-weight:500;font-size:13px;margin-bottom:10px}.progress-label span:last-child{color:var(--lava);font-weight:700;font-size:15px}
 .route{position:relative;height:26px}.route-track{position:absolute;left:0;right:0;top:11px;height:3px;border-radius:2px;background:var(--line)}.route-fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;background:linear-gradient(90deg,var(--teal),var(--lava));transition:width .3s}
 .route-marker{position:absolute;top:13px;left:0;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;background:var(--bg);border:3px solid var(--lava);transition:left .3s;box-shadow:0 0 0 3px #0b0f0e}
 .route-ends{display:flex;justify-content:space-between;color:var(--faint);font-size:11px;margin-top:4px}.route-ends span:nth-child(2){color:var(--muted)}
 .sync{font-size:11.5px;color:var(--faint);margin-top:7px;text-align:right}
+.sync a{color:var(--teal);text-decoration:none}.sync a:hover{text-decoration:underline}
+.sync button{all:unset;cursor:pointer;color:var(--faint);text-decoration:underline;font-size:11.5px}
 .week{border-top:1px solid var(--line);padding:16px 0 6px;position:relative}
 .week.current::before{content:"";position:absolute;left:-16px;top:0;bottom:0;width:3px;background:var(--lava)}
 .week.skipped{opacity:.5}
@@ -20,39 +40,39 @@ header{padding:26px 2px 6px;border-bottom:1px solid var(--line)}
 .wtitle{font-weight:500;font-size:13px;padding-top:3px}.range{color:var(--muted);font-size:12px}
 .tag{font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lava);border:1px solid #ff7a1a55;padding:4px 8px;border-radius:99px;white-space:nowrap}
 .sessions{margin-top:10px}
-.session{display:grid;grid-template-columns:44px 1fr 40px;gap:8px;align-items:center;padding:12px 0;border-top:1px solid #1a241f;min-height:66px}
+.session{display:grid;grid-template-columns:40px 1fr 44px;gap:10px;align-items:center;padding:13px 0;border-top:1px solid #1a241f;min-height:66px}
 .day{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--faint);text-transform:uppercase}
 .name{font-weight:700}.run .name{color:var(--teal)}.long .name{color:#8fd8cf}
 .race-day .name{color:var(--lava);font-size:17px}
 .details{color:var(--muted);font-size:12.5px;margin-top:2px}
-.check{appearance:none;width:32px;height:32px;border-radius:50%;border:2px solid var(--line);background:transparent;display:grid;place-content:center;cursor:pointer;transition:transform .12s,border-color .12s,background .12s}
+.check{appearance:none;width:38px;height:38px;border-radius:50%;border:2px solid var(--line);background:transparent;display:grid;place-content:center;cursor:pointer;transition:transform .12s,border-color .12s,background .12s;margin:0;justify-self:end}
 .check:hover{border-color:var(--faint)}
-.check:after{content:"✓";font-weight:700;font-size:16px;transform:scale(0);color:#06231a;transition:transform .15s}
+.check:after{content:"✓";font-weight:700;font-size:18px;transform:scale(0);color:#06231a;transition:transform .15s}
 .check:checked{background:var(--green);border-color:var(--green)}.check:checked:after{transform:scale(1)}.check:active{transform:scale(.9)}
 .check:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 .session:has(.check:checked) .copy{opacity:.45}
 .note{margin:10px 0 14px;padding:10px 12px;border-left:2px solid var(--teal);background:var(--panel);color:var(--muted);font-size:12.5px;border-radius:0 10px 10px 0}
 .lift-list{display:none;margin:8px 0 0;padding:8px 10px;border-left:2px solid var(--line);color:var(--muted);font-size:13px}.lift.open .lift-list{display:block}.lift-list div{display:flex;justify-content:space-between;gap:10px;padding:3px 0}.lift-list span:last-child{white-space:nowrap;color:var(--ink)}
-
 .week .wside{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
 .week:not(.current):not(.open) .sessions,.week:not(.current):not(.open) .note{display:none}
-.week .wtoggle{all:unset;cursor:pointer;color:var(--faint);font-size:11.5px;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.week .wtoggle{all:unset;cursor:pointer;color:var(--faint);font-size:11.5px;font-weight:700;letter-spacing:.04em;white-space:nowrap;padding:8px 2px}
 .week .wtoggle:hover{color:var(--muted)}.week .wtoggle:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 .week:not(.current) .whead{cursor:pointer}
-button.expand{all:unset;color:var(--lava);cursor:pointer;font-size:11.5px;font-weight:700;margin-top:5px}button.expand:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+button.expand{all:unset;color:var(--lava);cursor:pointer;font-size:11.5px;font-weight:700;margin-top:5px;padding:6px 2px}button.expand:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
 .refs{margin-top:30px}.refs h2{font-size:22px;letter-spacing:-.02em;margin:0 0 6px}
 .ref{border-top:1px solid var(--line)}.ref:last-child{border-bottom:1px solid var(--line)}
-.ref summary{cursor:pointer;padding:13px 2px;font-weight:700;font-size:14px;list-style:none}
+.ref summary{cursor:pointer;padding:14px 2px;font-weight:700;font-size:14px;list-style:none}
 .ref summary::after{content:"+";float:right;color:var(--lava)}.ref[open] summary::after{content:"−"}
 .ref-body{padding:0 2px 14px;color:var(--muted);font-size:13px}.ref-body b{color:var(--ink)}.ref-body p{margin:8px 0}
 .reset{display:block;margin:30px auto 0;color:var(--faint);background:none;border:0;text-decoration:underline;cursor:pointer;padding:12px;font:inherit;font-size:13px}
 .offline{color:#ffb36b}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.load-anim header,.load-anim .progress-wrap{animation:rise .5s ease-out both}.load-anim .progress-wrap{animation-delay:.08s}
+.load-anim header,.load-anim .today,.load-anim .raceweek,.load-anim .progress-wrap{animation:rise .5s ease-out both}.load-anim .progress-wrap{animation-delay:.08s}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media(min-width:600px){main{padding-top:32px}.hero{font-size:68px}.session{grid-template-columns:48px 1fr 42px;padding:13px 0}}
-</style></head><body><main class="load-anim"><header><div class="meta"><span><b>Lanzarote Half Marathon</b></span><span><b>Dec 5, 2026</b> · 10:30</span></div><h1 class="hero">The road<br>to <em>13.1</em></h1><p class="sub">Three runs. Two lifts. Saturday hoops. One finish line.</p><div class="count"><b id="days">–</b><span>days to Puerto del Carmen → Costa Teguise</span></div></header><div class="progress-wrap"><div class="progress-label"><span>Training progress</span><span id="pct">0%</span></div><div class="route"><div class="route-track"><div class="route-fill" id="fill"></div><div class="route-marker" id="marker"></div></div></div><div class="route-ends"><span>Puerto del Carmen</span><span>21.1 km</span><span>Costa Teguise</span></div><div class="sync" id="sync">loading progress…</div></div><div id="weeks"></div><section class="refs"><h2>Keep close</h2><div id="refs"></div></section><button class="reset" id="reset">Reset all progress</button></main><script>
+@media(min-width:600px){main{padding-top:32px}.hero{font-size:68px}.session{grid-template-columns:48px 1fr 46px;padding:14px 0}}
+</style></head><body><main class="load-anim"><header><div class="meta"><span><b>Lanzarote Half Marathon</b></span><span><b>Dec 5, 2026</b> · 10:30</span></div><h1 class="hero">The road<br>to <em>13.1</em></h1><p class="sub">Three runs. Two lifts. Saturday hoops. One finish line.</p><div class="count"><b id="days">–</b><span>days to Puerto del Carmen → Costa Teguise</span></div></header><section class="today" id="today" aria-label="Today's workout"></section><section class="raceweek" id="raceweek" aria-label="Race week"></section><div class="progress-wrap"><div class="progress-label"><span>Training progress</span><span id="pct">0%</span></div><div class="route"><div class="route-track"><div class="route-fill" id="fill"></div><div class="route-marker" id="marker"></div></div></div><div class="route-ends"><span>Puerto del Carmen</span><span>21.1 km</span><span>Costa Teguise</span></div><div class="sync"><span id="sync">loading progress…</span> · <span id="strava"></span></div></div><div id="weeks"></div><section class="refs"><h2>Keep close</h2><div id="refs"></div></section><button class="reset" id="reset">Reset all progress</button></main><script>
 const API='https://lanzarote-sync.lanzarote-sync-adiadd.workers.dev';
+const START=new Date(2026,7,31), RACE=new Date(2026,11,5,10,30);
 const q={steady:['Steady',"Slightly quicker than easy, still controlled. Don't push."],intervals:['Intervals','6 × 3 min hard (3–4 words max), 2 min walk between. 10 min warm-up and cool-down.'],tempo:['Tempo','20–30 min continuous at comfortably hard. 10 min warm-up and cool-down.'],race:['Strides','Easy running with 4 × 30 sec at race pace. Wakes the legs up, costs nothing.']};
 const raw=[
 [1,'Aug 31 – Sep 6',1,1.5,1,'steady','',"Deliberately tiny. Week 1 is about turning up three times, not about fitness. It will feel like nothing — that's the design."],
@@ -64,13 +84,83 @@ const raw=[
 const lower={3:['Lift — lower · squat','Week 1 again with a little more on the bar.',[['Back squat','3 × 8, heavier'],['Bulgarian split squat','3 × 8 each'],['Romanian deadlift','3 × 8'],['Calf raise — straight, then bent knee','2 × 15 each'],['Side plank · dead bug','2 × 30s · 2 × 10']]],4:['Lift — lower · deadlift','Heavier than week 2. Last of the easy weeks — enjoy it.',[['Deadlift or trap bar','3 × 8, heavier'],['Step-up','3 × 8 each'],['Hip thrust','3 × 10'],['Calf raise — straight, then bent knee','2 × 15 each'],['Pallof press · dead bug','2 × 10 each']]],5:['Lift — lower · squat','Heaviest squat of the block. From here running takes priority over adding weight.',[['Back squat','3 × 8, heaviest'],['Bulgarian split squat','3 × 8 each'],['Romanian deadlift','3 × 8'],['Calf raise — straight, then bent knee','2 × 15 each'],['Side plank · dead bug','2 × 30s · 2 × 10']]],6:['Lift — lower · deload','Running cutback week, so everything comes down together.',[['Deadlift or trap bar','2 × 8, ~70%'],['Step-up','2 × 8 each'],['Calf raise','2 × 15'],['Side plank','2 × 30s each']]],7:['Lift — lower · squat',"Stop adding weight now — you're maintaining.",[['Back squat','3 × 8'],['Bulgarian split squat','2 × 8 each'],['Romanian deadlift','2 × 8'],['Calf raise — straight, then bent knee','2 × 15 each'],['Side plank · dead bug','2 × 30s · 2 × 10']]],8:['Lift — lower · deadlift','Same weight as week 4. Maintaining, not chasing.',[['Deadlift or trap bar','3 × 8'],['Step-up','2 × 8 each'],['Hip thrust','3 × 10'],['Calf raise — straight, then bent knee','2 × 15 each'],['Pallof press · dead bug','2 × 10 each']]],9:['Lift — lower · squat',"If Thursday's run has felt wrecked lately, cut a set from the squat.",[['Back squat','3 × 8'],['Bulgarian split squat','2 × 8 each'],['Romanian deadlift','2 × 8'],['Calf raise — straight, then bent knee','2 × 15 each'],['Side plank · dead bug','2 × 30s · 2 × 10']]],10:['Lift — full body · deload','The split ends here. One session a week from now on.',[['Deadlift or trap bar','2 × 8, ~70%'],['Bench press','2 × 8'],['Barbell or dumbbell row','2 × 8'],['Curl + triceps extension','2 × 10 each'],['Side plank','2 × 30s each']]],11:['Lift — full body','One session covering everything, ~42 min.',[['Back squat','3 × 8'],['Bench press','3 × 8'],['Barbell or dumbbell row','3 × 8'],['Bulgarian split squat','2 × 8 each'],['Calf raise','2 × 15'],['Arms + delts','2 × 10–15']]],12:['Lift — full body · light legs','Peak week. No heavy hinge and no split squats.',[['Goblet or front squat','2 × 8, moderate'],['Bench press','3 × 8'],['Pull-up or lat pulldown','3 × 8'],['Calf raise','2 × 15'],['Arms + delts','2 × 10–15'],['Dead bug','2 × 10 each']]],13:['Lift — upper, light',"Taper. Nothing that leaves your legs sore this close to the race.",[['Bench press','2 × 8'],['Barbell or dumbbell row','2 × 8'],['Arms','2 × 10 each'],['Lateral raise · face pull','2 × 12 · 2 × 15']]],14:['Full rest — no gym','Race week. Sleep in.',[]]};
 const upper=[['Bench press','3 × 8'],['Barbell or dumbbell row','3 × 8'],['Overhead press','2 × 8'],['Pull-up or lat pulldown','2 × 8'],['Curl + triceps extension','3 × 10 each'],['Lateral raise','2 × 12'],['Face pull','2 × 15']];
 const refs=[['How the week is built','Mon rest. Tue quality run. Wed lift. Thu easy run. Fri upper-body lift through week 9, then rest. Saturday morning basketball, kept chill. Sunday long run. The original plan had the weekend reversed; this version is built around your Saturday hoops.'],['Effort, not pace','<b>Easy/long:</b> full sentences without gasping. It should feel almost embarrassingly slow.<br><b>Steady:</b> a notch up, still controlled.<br><b>Intervals:</b> hard but controlled, three or four words before you need air.<br><b>Tempo:</b> comfortably hard. You could talk; you would not want to.'],['Morning window','Everything on weekdays fits inside an hour. Kit, shoes, watch, and keys out the night before. Under 60 min you do not need to eat first. The actual constraint is sleep, so rest mornings count as training.'],['Warm up · 5 min','3–5 min brisk walk or very slow jog. Then 10 leg swings each way, 10 walking lunges per side, hip circles, ankle rolls and calf pumps, and 30 sec each of skips or butt kicks. Do not static-stretch cold.'],['Long-run fuel','Carry electrolytes once the long run passes an hour. Past 75 min, practise a gel or chews every 40–45 min. Use the same setup you plan to use on race day.'],['When work gets brutal','Drop in this order: Wednesday lift, Thursday run, Tuesday quality run. Protect the Sunday long run above everything. If you sleep under five hours, skip the morning session. Never cram missed work into the next week.'],['Pain rule','General soreness and heavy legs can be normal. Sharp, localised, worsening pain, or pain that changes how you run means stop and rest 2–3 days.']];
+const rwPrep=[['Kit laid out, bib pinned the night before'],['Watch and phone charged'],['Gels or chews packed — the same ones you trained with'],['Breakfast 2–3 hours before the gun, nothing new'],['Electrolytes in the morning'],['First three miles slower than feels right']];
 let done=new Set(['week-1-skipped','week-2-skipped']); let saveTimer;
-days.textContent=Math.max(0,Math.ceil((new Date(2026,11,5)-new Date())/86400000));
-function sess(id,day,name,detail,kind='',list=[]){return `<div class="session ${kind} ${list.length?'lift':''}" data-id="${id}"><div class="day">${day}</div><div class="copy"><div class="name">${name}</div><div class="details">${detail}</div>${list.length?`<button class="expand">show exercises</button><div class="lift-list">${list.map(x=>`<div><span>${x[0]}</span><span>${x[1]}</span></div>`).join('')}</div>`:''}</div><input class="check" type="checkbox" aria-label="mark ${day} complete"></div>`}
-function render(){const now=new Date(), start=new Date(2026,7,31), current=Math.max(3,Math.min(14,Math.floor((now-start)/604800000)+1));document.querySelector('#weeks').innerHTML=raw.map(w=>{const [n,range,tue,thu,long,qt,tag,note]=w;if(n<3)return `<article class="week skipped"><div class="whead"><div class="weekno">${n}</div><div><div class="wtitle">Week ${n}</div><div class="range">${range}</div></div><span class="tag">Skipped · 5K base</span></div></article>`;const quality=q[qt], wed=lower[n], fri=n<10?['Lift — upper',n===6?'Cutback week, ~25 min.':"No leg work — Sunday's long run needs fresh legs.",n===6?upper.slice(0,4).map(x=>[x[0],x[1].replace('3 ×','2 ×')]):upper]:['Rest — no gym',n===14?'Race week. Do nothing.':"The split has ended; recover for Sunday's long run.",[]];const race=n===14;return `<article class="week ${n===current?'current':''}" id="week-${n}"><div class="whead"><div class="weekno">${n}</div><div><div class="wtitle">${n===current?'This week':'Week '+n}</div><div class="range">${range}</div></div><div class="wside">${tag?`<span class="tag">${tag}</span>`:''}${n===current?'':`<button class="wtoggle" aria-expanded="false">+ show week</button>`}</div></div><div class="sessions">${sess(`w${n}-mon`,'Mon','Rest','Completely.','')}${sess(`w${n}-tue`,'Tue',`${tue} mi · ${quality[0]}`,quality[1],'run')}${sess(`w${n}-wed`,'Wed',wed[0],wed[1],'',wed[2])}${sess(`w${n}-thu`,'Thu',`${thu} mi · ${race?'Shakeout':'Easy'}`,race?'Short and loose. Optional if the legs feel heavy.':'Conversational — full sentences, or you are going too fast.','run')}${sess(`w${n}-fri`,'Fri',fri[0],fri[1],'',fri[2])}${sess(`w${n}-sat`,'Sat',race?'Rest · feet up':'Basketball',race?'Skip it this week. One week off will not hurt; a rolled ankle will.':'Morning hoops. Keep it chill, hydrate hard, and save your legs for Sunday.','')}${sess(`w${n}-sun`,'Sun',race?'13.1 mi · RACE DAY':`${long} mi · Long run`,race?'Saturday, Dec 5 at 10:30 AM. First three miles should feel too easy.':'All easy, slower than you think. This is the session that carries the plan.','long '+(race?'race-day':''))}</div>${note?`<p class="note">${note}</p>`:''}</article>`}).join('');document.querySelectorAll('.week:not(.current) .whead').forEach(h=>{h.addEventListener('click',e=>{const w=h.closest('.week'),b=h.querySelector('.wtoggle'),open=w.classList.toggle('open');if(b){b.setAttribute('aria-expanded',open);b.textContent=open?'\u2212 hide week':'+ show week'}})});document.querySelectorAll('.session').forEach(el=>{const cb=el.querySelector('.check');cb.checked=done.has(el.dataset.id);cb.onchange=()=>{cb.checked?done.add(el.dataset.id):done.delete(el.dataset.id);update();queueSave()};el.querySelector('.expand')?.addEventListener('click',e=>{el.classList.toggle('open');e.target.textContent=el.classList.contains('open')?'hide exercises':'show exercises'})});update();if(current>=3)setTimeout(()=>document.querySelector(`#week-${current}`)?.scrollIntoView({block:'center'}),100)}
-function update(){const total=(14-2)*7, count=[...done].filter(x=>/^w/.test(x)).length,p=Math.round((count+14)/(total+14)*100);pct.textContent=p+'%';fill.style.width=p+'%';marker.style.left=p+'%'}
-async function load(){const local=localStorage.getItem('lanzarote-done');try{const r=await fetch(API+'?t='+Date.now());if(!r.ok)throw 0;const d=await r.json();if(!d.updatedAt&&local){done=new Set(JSON.parse(local));sync.textContent='saved across devices';render();queueSave();return}done=new Set(d.done||[]);localStorage.setItem('lanzarote-done',JSON.stringify([...done]));sync.textContent='saved across devices';render()}catch{const x=localStorage.getItem('lanzarote-done');if(x)done=new Set(JSON.parse(x));sync.innerHTML=localStorage.getItem('lanzarote-done')?'<span class="offline">offline · showing progress from this device</span>':'<span class="offline">offline · changes save on this device until you are back online</span>';render()}}
+const DAYS=['mon','tue','wed','thu','fri','sat','sun'];
+function weekOf(d){const a=Date.UTC(START.getFullYear(),START.getMonth(),START.getDate()),b=Date.UTC(d.getFullYear(),d.getMonth(),d.getDate());return Math.floor((b-a)/604800000)+1}
+function weekStart(n){const d=new Date(START);d.setDate(d.getDate()+(n-1)*7);return d}
+function dateStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function sessionsForWeek(n){const w=raw.find(x=>x[0]===n),[wn,range,tue,thu,long,qt]=w,quality=q[qt],wed=lower[n],race=n===14;
+const fri=n<10?{name:'Lift — upper',detail:n===6?'Cutback week, ~25 min.':"No leg work — Sunday's long run needs fresh legs.",list:n===6?upper.slice(0,4).map(x=>[x[0],x[1].replace('3 ×','2 ×')]):upper}:{name:'Rest — no gym',detail:n===14?'Race week. Do nothing.':"The split has ended; recover for Sunday's long run.",rest:true};
+return[{id:`w${n}-mon`,day:'Mon',name:'Rest',detail:'Completely.',rest:true},
+{id:`w${n}-tue`,day:'Tue',name:`${tue} mi · ${quality[0]}`,detail:quality[1],kind:'run',miles:tue},
+{id:`w${n}-wed`,day:'Wed',name:wed[0],detail:wed[1],list:wed[2],rest:/rest/i.test(wed[0])},
+{id:`w${n}-thu`,day:'Thu',name:`${thu} mi · ${race?'Shakeout':'Easy'}`,detail:race?'Short and loose. Optional if the legs feel heavy.':'Conversational — full sentences, or you are going too fast.',kind:'run',miles:thu},
+Object.assign({id:`w${n}-fri`,day:'Fri'},fri),
+race?{id:`w${n}-sat`,day:'Sat',name:'13.1 mi · RACE DAY',detail:'Saturday, Dec 5 at 10:30 AM. First three miles should feel too easy.',kind:'long race-day',miles:13.1}:{id:`w${n}-sat`,day:'Sat',name:'Basketball',detail:'Morning hoops. Keep it chill, hydrate hard, and save your legs for Sunday.'},
+race?{id:`w${n}-sun`,day:'Sun',name:'Rest · feet up',detail:'You raced yesterday. Walk, eat, sleep.',rest:true}:{id:`w${n}-sun`,day:'Sun',name:`${long} mi · Long run`,detail:'All easy, slower than you think. This is the session that carries the plan.',kind:'long',miles:long}]}
+function allSessions(){const m=new Map();for(let n=3;n<=14;n++)sessionsForWeek(n).forEach((s,i)=>{s.date=weekStart(n);s.date.setDate(s.date.getDate()+i);m.set(s.id,s)});return m}
+function sessHTML(s){return `<div class="session ${s.kind||''} ${s.list&&s.list.length?'lift':''}" data-id="${s.id}"><div class="day">${s.day}</div><div class="copy"><div class="name">${s.name}</div><div class="details">${s.detail}</div>${s.list&&s.list.length?`<button class="expand">show exercises</button><div class="lift-list">${s.list.map(x=>`<div><span>${x[0]}</span><span>${x[1]}</span></div>`).join('')}</div>`:''}</div><input class="check" type="checkbox" aria-label="mark ${s.day} complete"></div>`}
+function wireSessions(root){root.querySelectorAll('.session').forEach(el=>{const cb=el.querySelector('.check');cb.checked=done.has(el.dataset.id);cb.onchange=()=>{toggle(el.dataset.id,cb.checked)};el.querySelector('.expand')?.addEventListener('click',e=>{el.classList.toggle('open');e.target.textContent=el.classList.contains('open')?'hide exercises':'show exercises'})})}
+function toggle(id,on){on?done.add(id):done.delete(id);document.querySelectorAll(`.session[data-id="${id}"] .check`).forEach(c=>c.checked=on);renderToday();update();queueSave()}
+function paceStatus(now){const wn=weekOf(now);if(wn<3)return{cls:'pace-on',html:'Plan starts <b>Monday, Sep 14</b>'};if(wn>14)return null;
+const map=allSessions(),dow=(now.getDay()+6)%7;let expected=0;map.forEach(s=>{if(s.rest)return;const sn=+s.id.match(/^w(\d+)-/)[1];if(sn<wn||(sn===wn&&s.date<=now))expected++});
+let completed=0;done.forEach(id=>{const s=map.get(id);if(s&&!s.rest)completed++});
+const diff=completed-expected;
+if(diff>=2)return{cls:'pace-ahead',html:`Ahead of plan · <b>${completed} of ${expected}</b> sessions done`};
+if(diff>=-1)return{cls:'pace-on',html:`On track · <b>${completed} of ${expected}</b> sessions done`};
+return{cls:'pace-behind',html:`<b>${-diff} sessions behind</b> · protect Sunday's long run`}}
+let todayId=null;
+function renderToday(){const el=document.getElementById('today'),now=new Date(),wn=weekOf(now);
+if(wn===14){el.style.display='none';return}el.style.display='';
+if(wn>14){el.innerHTML=`<div class="t-label"><span>After the race</span></div><div class="t-row"><div><div class="t-name">13.1 — done.</div><div class="t-detail">However it went, you got to the start line trained. That was the whole project.</div></div></div>`;todayId=null;return}
+if(wn<3){const next=sessionsForWeek(3)[1];el.innerHTML=`<div class="t-label"><span>Today · ${now.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</span><span>Pre-plan</span></div><div class="t-row"><div><div class="t-name">Off week</div><div class="t-detail">Weeks 1–2 are skipped — you already have the 5K base. The plan starts Monday: ${next.name} on Tuesday.</div></div></div><div class="pace pace-on"><span>Plan starts <b>Monday, Sep 14</b></span></div>`;todayId=null;return}
+const dow=(now.getDay()+6)%7,s=sessionsForWeek(wn)[dow];todayId=s.id;
+const kindCls=s.kind&&s.kind.includes('race')?'race':(s.kind||'');
+el.innerHTML=`<div class="t-label"><span>Today · ${now.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</span><span>Week ${wn} of 14</span></div><div class="t-row"><div><div class="t-name ${kindCls}">${s.name}</div><div class="t-detail">${s.detail}</div></div><input class="check" type="checkbox" aria-label="mark today complete" ${done.has(s.id)?'checked':''}></div>${(()=>{const p=paceStatus(now);return p?`<div class="pace ${p.cls}"><span>${p.html}</span></div>`:''})()}`;
+el.querySelector('.check').onchange=e=>toggle(s.id,e.target.checked)}
+function renderRaceWeek(now){const el=document.getElementById('raceweek');if(weekOf(now)!==14)return;
+document.body.classList.add('race-week');
+const sessions=sessionsForWeek(14);
+el.innerHTML=`<div class="rw-label">Race week</div><div class="rw-count" id="rwcount"><div><b>–</b><span>days</span></div><div><b>–</b><span>hrs</span></div><div><b>–</b><span>min</span></div><div><b>–</b><span>sec</span></div></div><p class="rw-sub">to the start line · Saturday, Dec 5 · 10:30 · Puerto del Carmen</p><h3>This week</h3>${sessions.map(sessHTML).join('')}<h3>Race-morning checklist</h3>${rwPrep.map((p,i)=>`<div class="session" data-id="rw-prep-${i}"><div class="day">Prep</div><div class="copy"><div class="name" style="font-size:14px">${p[0]}</div></div><input class="check" type="checkbox" aria-label="prep: ${p[0]}"></div>`).join('')}`;
+wireSessions(el);
+if(window._rwIv)return;
+const tick=()=>{const t=RACE-new Date();const b=document.querySelectorAll('#rwcount b');if(!b.length)return;
+if(t<=0){b[0].textContent='0';b[1].textContent='0';b[2].textContent='0';b[3].textContent='0';const sub=el.querySelector('.rw-sub');if(sub)sub.textContent=t>-86400000?'RACE DAY — go get it. Start slower than feels right.':'13.1 — in the books. Nice work.';return}
+b[0].textContent=Math.floor(t/86400000);b[1].textContent=Math.floor(t/3600000)%24;b[2].textContent=Math.floor(t/60000)%60;b[3].textContent=Math.floor(t/1000)%60};
+tick();window._rwIv=setInterval(tick,1000)}
+function render(){const now=new Date(),current=Math.max(3,Math.min(14,weekOf(now)));
+document.querySelector('#weeks').innerHTML=raw.map(w=>{const [n,range,tue,thu,long,qt,tag,note]=w;
+if(n<3)return `<article class="week skipped"><div class="whead"><div class="weekno">${n}</div><div><div class="wtitle">Week ${n}</div><div class="range">${range}</div></div><span class="tag">Skipped · 5K base</span></div></article>`;
+const ss=sessionsForWeek(n);
+return `<article class="week ${n===current?'current':''}" id="week-${n}"><div class="whead"><div class="weekno">${n}</div><div><div class="wtitle">${n===current?'This week':'Week '+n}</div><div class="range">${range}</div></div><div class="wside">${tag?`<span class="tag">${tag}</span>`:''}${n===current?'':`<button class="wtoggle" aria-expanded="false">+ show week</button>`}</div></div><div class="sessions">${ss.map(sessHTML).join('')}</div>${note?`<p class="note">${note}</p>`:''}</article>`}).join('');
+document.querySelectorAll('.week:not(.current) .whead').forEach(h=>{h.addEventListener('click',e=>{const w=h.closest('.week'),b=h.querySelector('.wtoggle'),open=w.classList.toggle('open');if(b){b.setAttribute('aria-expanded',open);b.textContent=open?'− hide week':'+ show week'}})});
+wireSessions(document);renderToday();renderRaceWeek(now);update();
+if(current>=3&&weekOf(now)<14)setTimeout(()=>document.querySelector(`#week-${current}`)?.scrollIntoView({block:'center'}),100)}
+function update(){const total=(14-2)*7,count=[...done].filter(x=>/^w\d/.test(x)).length,p=Math.round((count+14)/(total+14)*100);pct.textContent=p+'%';fill.style.width=p+'%';marker.style.left=p+'%'}
+async function load(){const local=localStorage.getItem('lanzarote-done');try{const r=await fetch(API+'?t='+Date.now());if(!r.ok)throw 0;const d=await r.json();if(!d.updatedAt&&local){done=new Set(JSON.parse(local));sync.textContent='saved across devices';render();queueSave();stravaInit();return}done=new Set(d.done||[]);localStorage.setItem('lanzarote-done',JSON.stringify([...done]));sync.textContent='saved across devices';render();stravaInit()}catch{const x=localStorage.getItem('lanzarote-done');if(x)done=new Set(JSON.parse(x));sync.innerHTML=localStorage.getItem('lanzarote-done')?'<span class="offline">offline · showing progress from this device</span>':'<span class="offline">offline · changes save on this device until you are back online</span>';render()}}
 function queueSave(){localStorage.setItem('lanzarote-done',JSON.stringify([...done]));sync.textContent='saving…';clearTimeout(saveTimer);saveTimer=setTimeout(save,500)}
 async function save(){try{const r=await fetch(API,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({done:[...done],updatedAt:new Date().toISOString()})});if(!r.ok)throw 0;sync.textContent='saved across devices'}catch{sync.innerHTML='<span class="offline">offline · saved on this device for now</span>'}}
-refs.innerHTML=refs.map(x=>`<details class="ref"><summary>${x[0]}</summary><div class="ref-body"><p>${x[1]}</p></div></details>`).join('');reset.onclick=()=>{if(confirm('Clear every completed workout?')){done=new Set(['week-1-skipped','week-2-skipped']);render();queueSave()}};load();
+function matchActivities(acts){const map=allSessions(),byDate={};map.forEach(s=>{if(s.miles)(byDate[dateStr(s.date)]=byDate[dateStr(s.date)]||[]).push(s)});
+const matched=[];const used=new Set();
+acts.filter(a=>/run/i.test(a.sport_type||a.type||'')).forEach(a=>{const d=(a.start_date_local||'').slice(0,10),mi=(a.distance||0)/1609.34;(byDate[d]||[]).forEach(s=>{if(!used.has(s.id)&&!done.has(s.id)&&mi>=0.8*s.miles){used.add(s.id);matched.push(s.id)}})});
+return matched}
+async function stravaInit(){const el=document.getElementById('strava');
+const qs=new URLSearchParams(location.search);
+if(qs.get('strava')==='connected'){el.textContent='Strava connected ✓';history.replaceState(null,'',location.pathname)}
+let st;try{st=await (await fetch(API+'/strava/status')).json()}catch{if(!el.textContent)el.innerHTML='<a href="'+API+'/strava/connect">connect Strava</a>';return}
+if(!st.configured){if(!el.textContent)el.innerHTML='<span title="Strava app credentials not installed yet">Strava: setup in progress</span>';return}
+if(!st.connected){el.innerHTML='<a href="'+API+'/strava/connect">connect Strava</a>';return}
+try{const r=await (await fetch(API+'/strava/sync')).json();
+if(!r.connected){el.innerHTML='<a href="'+API+'/strava/connect">connect Strava</a>';return}
+const matched=matchActivities(r.activities||[]);let added=0;
+matched.forEach(id=>{if(!done.has(id)){done.add(id);added++}});
+if(added>0){render();queueSave()}
+el.innerHTML=`Strava ✓${added?` · ${added} session${added>1?'s':''} auto-checked`:''} · <button id="strava-disc">disconnect</button>`;
+document.getElementById('strava-disc').onclick=async()=>{if(!confirm('Disconnect Strava? Auto-check will stop.'))return;try{await fetch(API+'/strava/disconnect',{method:'POST'})}catch{}el.innerHTML='<a href="'+API+'/strava/connect">connect Strava</a>'}
+}catch{if(!el.textContent)el.textContent='Strava connected'}}
+days.textContent=Math.max(0,Math.ceil((RACE-new Date())/86400000));
+refs.innerHTML=refs.map(x=>`<details class="ref"><summary>${x[0]}</summary><div class="ref-body"><p>${x[1]}</p></div></details>`).join('');
+reset.onclick=()=>{if(confirm('Clear every completed workout?')){done=new Set(['week-1-skipped','week-2-skipped']);render();queueSave()}};
+load();
 </script></body></html>
