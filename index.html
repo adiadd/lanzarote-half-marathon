@@ -15,6 +15,10 @@ header{padding:26px 2px 6px;border-bottom:1px solid var(--line)}
 .today .check{flex:none;width:44px;height:44px}
 .today .pace{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--muted)}
 .today .pace b{font-weight:700}.pace-on b{color:var(--teal)}.pace-ahead b{color:var(--green)}.pace-behind b{color:var(--lava)}
+.today{cursor:pointer;transition:border-color .2s}.today:hover{border-color:#46b4a766}
+.today .t-jump{display:inline-block;margin-top:10px;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--teal)}
+.session.flash{animation:flash 1.8s ease-out}
+@keyframes flash{0%{background:#46b4a730}55%{background:#46b4a718}100%{background:transparent}}
 .raceweek{display:none;margin:18px 0 6px;padding:18px 16px 16px;border:1px solid #ff7a1a44;border-radius:14px;background:var(--panel)}
 body.race-week .raceweek{display:block}
 body.race-week #today,body.race-week #weeks{display:none}
@@ -113,13 +117,17 @@ if(diff>=2)return{cls:'pace-ahead',html:`Ahead of plan · <b>${completed} of ${e
 if(diff>=-1)return{cls:'pace-on',html:`On track · <b>${completed} of ${expected}</b> sessions done`};
 return{cls:'pace-behind',html:`<b>${-diff} sessions behind</b> · protect Sunday's long run`}}
 let todayId=null;
+function scrollToSession(id){const row=document.querySelector(`#weeks .session[data-id="${id}"]`);if(!row)return;const w=row.closest('.week');
+if(w&&!w.classList.contains('open')&&!w.classList.contains('current')){const h=w.querySelector('.whead');if(h)h.click()}
+row.classList.remove('flash');void row.offsetWidth;
+setTimeout(()=>{row.scrollIntoView({behavior:'smooth',block:'center'});row.classList.add('flash')},60)}
 function renderToday(){const el=document.getElementById('today'),now=new Date(),wn=weekOf(now);
 if(wn===14){el.style.display='none';return}el.style.display='';
 if(wn>14){el.innerHTML=`<div class="t-label"><span>After the race</span></div><div class="t-row"><div><div class="t-name">13.1 — done.</div><div class="t-detail">However it went, you got to the start line trained. That was the whole project.</div></div></div>`;todayId=null;return}
 const dow=(now.getDay()+6)%7,s=sessionsForWeek(wn)[dow];todayId=s.id;
 const kindCls=s.kind&&s.kind.includes('race')?'race':(s.kind||'');
-el.innerHTML=`<div class="t-label"><span>Today · ${now.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</span><span>Week ${wn} of 14</span></div><div class="t-row"><div><div class="t-name ${kindCls}">${s.name}</div><div class="t-detail">${s.detail}</div></div><input class="check" type="checkbox" aria-label="mark today complete" ${done.has(s.id)?'checked':''}></div>${(()=>{const p=paceStatus(now);return p?`<div class="pace ${p.cls}"><span>${p.html}</span></div>`:''})()}`;
-el.querySelector('.check').onchange=e=>toggle(s.id,e.target.checked)}
+el.innerHTML=`<div class="t-label"><span>Today · ${now.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'})}</span><span>Week ${wn} of 14</span></div><div class="t-row"><div><div class="t-name ${kindCls}">${s.name}</div><div class="t-detail">${s.detail}</div></div><input class="check" type="checkbox" aria-label="mark today complete" ${done.has(s.id)?'checked':''}></div>${(()=>{const p=paceStatus(now);return p?`<div class="pace ${p.cls}"><span>${p.html}</span></div>`:''})()}<span class="t-jump">↓ jump to session</span>`;
+el.querySelector('.check').onchange=e=>toggle(s.id,e.target.checked);el.onclick=e=>{if(e.target.closest('.check'))return;scrollToSession(s.id)}}
 function renderRaceWeek(now){const el=document.getElementById('raceweek');if(weekOf(now)!==14)return;
 document.body.classList.add('race-week');
 const sessions=sessionsForWeek(14);
