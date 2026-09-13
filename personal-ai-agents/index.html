@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e14">
+<title>Personal AI agents, compared</title>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#10161f; --line:#1e2836;
+    --ink:#e8eef6; --dim:#8d9aaf; --faint:#5d6b80;
+    --link:#5fb4c9; --signal:#e8a33d;
+    --good:#4ade80; --warn:#f0b84a; --bad:#f87171;
+  }
+  *{box-sizing:border-box; -webkit-text-size-adjust:100%; -webkit-tap-highlight-color:transparent;}
+  html{background:var(--bg); color-scheme:dark;}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;}
+  .wrap{max-width:660px; margin:0 auto; padding:0 18px 80px;}
+  h1,h2,h3{font-family:ui-serif,"New York",Georgia,serif; font-weight:600; letter-spacing:-0.01em;}
+  h1{font-size:34px; line-height:1.15; margin:6px 0 14px;}
+  h2{font-size:22px; margin:0 0 12px;}
+  h3{font-size:18px; margin:0 0 8px;}
+  p{margin:10px 0;}
+  a{color:var(--link); text-decoration:none;}
+  a:active{opacity:.7;}
+  sup a{font-size:11px; color:var(--faint);}
+  .sub{color:var(--dim); font-size:14px;}
+  .kicker{color:var(--faint); font-size:13px; margin:28px 0 0;}
+  section{border-top:1px solid var(--line); margin-top:44px; padding-top:26px;}
+
+  /* hero verdict */
+  .hero{padding:8px 0 4px;}
+  .lede{font-size:17px; line-height:1.65;}
+  .glance{margin:22px 0 8px; border-top:1px solid var(--line);}
+  .glance .row{display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--line); align-items:baseline;}
+  .glance .lab{color:var(--signal); font-size:13px; font-weight:600; min-width:86px; flex-shrink:0;}
+  .glance .row p{margin:0; font-size:15px;}
+
+  /* verdict blocks: amber marks decisions */
+  .verdict{border-left:2px solid var(--signal); background:rgba(232,163,61,.06);
+    border-radius:0 12px 12px 0; padding:14px 16px; margin:16px 0;}
+
+  .tag{display:inline-block; border:1px solid var(--line); color:var(--dim); font-size:12px;
+    border-radius:999px; padding:2px 10px; margin:0 6px 6px 0;}
+  .tag.g{color:var(--good); border-color:rgba(74,222,128,.35);}
+  .tag.y{color:var(--warn); border-color:rgba(240,184,74,.35);}
+  .tag.b{color:var(--link); border-color:rgba(95,180,201,.35);}
+
+  /* landscape shapes */
+  .shape{padding:14px 0; border-bottom:1px solid var(--line);}
+  .shape:last-child{border-bottom:none;}
+  .shape p{margin:6px 0;}
+
+  /* deep dives */
+  .dive{margin:26px 0; padding-left:16px; border-left:1px solid var(--line);}
+  .dive.hero-dive{border-left-color:var(--signal);}
+  .kv{display:flex; gap:10px; font-size:14.5px; margin:10px 0;}
+  .kv .k{color:var(--faint); min-width:88px; flex-shrink:0; font-size:13px; padding-top:1px;}
+  .kv p{margin:0;}
+  .quote{color:var(--dim); font-family:ui-serif,"New York",Georgia,serif; font-style:italic;
+    font-size:15px; border-left:2px solid var(--line); padding-left:12px; margin:10px 0;}
+
+  /* table */
+  .tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; margin:14px -4px; padding:0 4px;}
+  table{border-collapse:collapse; width:100%; min-width:620px; font-size:13.5px;}
+  th,td{border:1px solid var(--line); padding:9px 10px; text-align:left; vertical-align:top;}
+  th{background:var(--panel); font-weight:600;}
+  td:first-child,th:first-child{position:sticky; left:0; background:var(--panel); font-weight:600; min-width:104px;}
+
+  ol.moves{padding-left:22px; margin:12px 0;}
+  ol.moves li{margin:14px 0;}
+  ul.tight{margin:10px 0; padding-left:20px;} ul.tight li{margin:8px 0;}
+
+  .note{border:1px solid var(--line); border-radius:12px; padding:12px 14px;
+    font-size:13.5px; color:var(--dim); margin:16px 0;}
+  .src{font-size:14px; margin:8px 0; word-break:break-word; color:var(--dim);}
+  .src a{color:var(--link);}
+  .num{color:var(--faint); display:inline-block; min-width:26px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <p class="kicker">Personal research brief - September 13, 2026</p>
+  <h1>Stay on Instinct.</h1>
+  <p class="lede">You asked how Instinct stacks up against Hermes, OpenClaw, Grok Bot, and the rest of the personal-AI-agent wave. I mapped the whole landscape and read the real reviews. The answer: nothing else matches how you actually use an agent - iMessage-first, zero maintenance, approval before anything external - and switching costs you all your built-up context.</p>
+  <div class="glance">
+    <div class="row"><span class="lab">Keep</span><p><strong>Instinct as your daily agent.</strong> No competitor matches the shape of what you already have.</p></div>
+    <div class="row"><span class="lab">Try</span><p><strong>Grok Bot, one month at $30</strong> if you want to see the frontier. Beta, with real trust issues.</p></div>
+    <div class="row"><span class="lab">Skip</span><p><strong>Hermes and OpenClaw</strong> unless you want the hobby itself. Every honest review prices them in weekends.</p></div>
+  </div>
+</div>
+
+<section>
+  <h2>The names, decoded</h2>
+  <p>Your voice note garbled three names. All three resolved with confidence:</p>
+  <ul class="tight">
+    <li><strong>"Ermesi" = Hermes Agent</strong>, Nous Research's open-source self-improving agent.<sup><a href="#s5">[5]</a></sup> (An unrelated iPhone app called "Hermes AI" also exists; not the same thing.)</li>
+    <li><strong>"OpenClaw" = OpenClaw</strong>, the self-hosted open-source gateway that puts an agent inside your chat apps.<sup><a href="#s8">[8]</a></sup></li>
+    <li><strong>"GrockBot" = Grok Bot</strong>, xAI's always-on agent, launched August 11, 2026. Not the @grok bot that replies to tweets.<sup><a href="#s2">[2]</a></sup></li>
+  </ul>
+  <p class="sub">These three plus Instinct are a clean cut of the whole category: two managed agents, and the two big self-hosted options.</p>
+</section>
+
+<section>
+  <h2>The landscape in four shapes</h2>
+  <p class="sub">2026 roundups split the category by the surface the agent runs on.<sup><a href="#s13">[13]</a><a href="#s14">[14]</a></sup></p>
+  <div class="shape">
+    <p><span class="tag b">Managed personal agents</span><span class="tag g">zero setup</span></p>
+    <p>A company runs the agent; you just talk to it. <strong>Instinct</strong> (iMessage-native) and <strong>Grok Bot</strong> (each bot gets its own cloud computer).<sup><a href="#s4">[4]</a></sup> The shape that fits a person, not a homelab.</p>
+  </div>
+  <div class="shape">
+    <p><span class="tag b">Self-hosted open source</span><span class="tag y">weekend project</span></p>
+    <p><strong>OpenClaw</strong> and <strong>Hermes Agent</strong>. Free, MIT-licensed, runs on your hardware or a cheap VPS, reachable from Telegram, WhatsApp, Signal, iMessage. Maximum control; you are the sysadmin, the security team, and the on-call rotation.<sup><a href="#s6">[6]</a><a href="#s11">[11]</a></sup></p>
+  </div>
+  <div class="shape">
+    <p><span class="tag b">Chatbots with agent modes</span><span class="tag">assistants first</span></p>
+    <p><strong>ChatGPT</strong> (Agent Mode, $20/mo), <strong>Claude</strong> ($20/mo, Max $100-200), <strong>Gemini</strong> ($19.99/mo; its always-on agent needs Ultra at $99.99/mo), <strong>Copilot</strong> ($19.99/mo in Microsoft 365). Great thinkers; agent features sit inside their own apps.<sup><a href="#s13">[13]</a></sup></p>
+  </div>
+  <div class="shape">
+    <p><span class="tag b">Specialists</span><span class="tag">narrow and deep</span></p>
+    <p><strong>Manus</strong> and <strong>Genspark</strong> for autonomous research runs (free daily credits, from $20-25/mo); <strong>Lindy</strong> ($29.99/mo) and <strong>alfred_</strong> ($24.99/mo) for inbox-shaped work; <strong>Gravity</strong> for scheduled jobs.<sup><a href="#s13">[13]</a></sup></p>
+  </div>
+</section>
+
+<section>
+  <h2>Side by side</h2>
+  <div class="tablewrap">
+  <table>
+    <tr><th>Agent</th><th>What it is</th><th>Where you talk</th><th>Setup</th><th>Price</th><th>Autonomy</th></tr>
+    <tr>
+      <td>Instinct</td>
+      <td>Managed personal agent; lives in your messages</td>
+      <td>iMessage natively; own agent email address; location sharing via iMessage; agent-to-agent (i2i) in preview</td>
+      <td>None - text it</td>
+      <td>(your account)</td>
+      <td>Approval-first: acts on standing grants, asks before anything external</td>
+    </tr>
+    <tr>
+      <td>Grok Bot<sup><a href="#s1">[1]</a></sup></td>
+      <td>Managed AI teammates, each with a persistent cloud computer (xAI, early beta since Aug 2026)</td>
+      <td>macOS + iOS apps; no iMessage or WhatsApp</td>
+      <td>Best in class, minutes<sup><a href="#s3">[3]</a></sup></td>
+      <td>From $30/mo (SuperGrok); bundled in Cursor Pro $20/mo; $100 tier for heavy use<sup><a href="#s1">[1]</a><a href="#s2">[2]</a></sup></td>
+      <td>High: signs into your tools and acts as you; teach routines by demonstration</td>
+    </tr>
+    <tr>
+      <td>Hermes Agent<sup><a href="#s5">[5]</a></sup></td>
+      <td>Open-source "self-improving" agent (Nous Research, MIT); writes its own skills, persistent memory</td>
+      <td>CLI + Telegram, Discord, Slack, WhatsApp, Signal, email from one gateway</td>
+      <td>High: a Saturday of setup; you run the server<sup><a href="#s7">[7]</a></sup></td>
+      <td>Software free; model APIs ~$30-150/mo typical; managed FlyHermes exists<sup><a href="#s6">[6]</a><a href="#s7">[7]</a></sup></td>
+      <td>High, self-configured: cron automations, subagents, sandboxed backends</td>
+    </tr>
+    <tr>
+      <td>OpenClaw<sup><a href="#s8">[8]</a></sup></td>
+      <td>Open-source self-hosted gateway between your chat apps and an agent; huge community; 2.0 shipped Sept 2026</td>
+      <td>iMessage, WhatsApp, Telegram, Signal, Discord, Slack, more; browser dashboard</td>
+      <td>High, though 2.0 simplified onboarding<sup><a href="#s10">[10]</a></sup></td>
+      <td>Software free; VPS $10-30/mo + model spend; managed hosting $49-199/mo<sup><a href="#s11">[11]</a></sup></td>
+      <td>High, self-configured: multi-channel routing, skills, plugins, multi-agent</td>
+    </tr>
+    <tr>
+      <td>ChatGPT / Claude / Gemini<sup><a href="#s13">[13]</a></sup></td>
+      <td>Frontier chatbots with paid agent modes</td>
+      <td>Their own apps + browser</td>
+      <td>None</td>
+      <td>~$20/mo entry each (Gemini's always-on agent: $99.99/mo Ultra)</td>
+      <td>Session-scoped; strongest at reasoning and writing, weakest at "runs while you sleep"</td>
+    </tr>
+    <tr>
+      <td>Manus / Genspark<sup><a href="#s13">[13]</a></sup></td>
+      <td>Autonomous research-run specialists</td>
+      <td>Web apps</td>
+      <td>None</td>
+      <td>Free daily credits; from $20-24.99/mo</td>
+      <td>Give a goal, it runs 30 steps and returns a report; not recurring, not inbox-shaped</td>
+    </tr>
+  </table>
+  </div>
+  <p class="sub">Scroll the table sideways on your phone.</p>
+</section>
+
+<section>
+  <h2>The four you named, in depth</h2>
+
+  <div class="dive hero-dive">
+    <h3>Instinct (what you already use)</h3>
+    <p><span class="tag g">managed</span><span class="tag g">iMessage-native</span><span class="tag g">approval-first</span></p>
+    <div class="kv"><span class="k">What it is</span><p>A personal agent that lives in your one-to-one iMessage conversation. No app to open, no server to run. It carries its own agent email address, shares location natively through iMessage (more location features still rolling out), and can coordinate with other people's agents through Instinct-to-Instinct, in preview on your account with a public rollout coming.</p></div>
+    <div class="kv"><span class="k">What it does</span><p>Your usage is the honest spec sheet: inbox watching with judgment about what is noise, half-marathon training plans, daily digests, trip planning, investing research, voice-dictated deep research (this page), drafting in your voice, and memory of your life across all of it.</p></div>
+    <div class="kv"><span class="k">Autonomy</span><p>The strictest model here, by your own design: it researches, drafts, builds, and watches on its own, but anything that sends, spends, books, or deletes waits for your yes. No other product in this brief ships that as a first-class promise. Grok Bot's own docs warn that "rehearsing an email send sends it."<sup><a href="#s3">[3]</a></sup></p></div>
+    <div class="kv"><span class="k">Weaknesses</span><p>Honest ones: no independent public reviews exist to quote against the others; iMessage is the home surface rather than one option among twenty; and like every managed agent, you are trusting a company with your context. This section is grounded in the product's FAQ and your usage, not marketing copy.</p></div>
+  </div>
+
+  <div class="dive">
+    <h3>Grok Bot <span class="sub">- xAI</span></h3>
+    <p><span class="tag b">managed</span><span class="tag b">computer-use</span><span class="tag y">early beta</span><span class="tag y">trust questions</span></p>
+    <p>Launched August 11, 2026. Each bot gets its own always-on cloud computer, signs into your tools, and works while your laptop is closed. You teach it a workflow by doing it once while it watches; multiple bots can team up in a group chat.<sup><a href="#s1">[1]</a><a href="#s4">[4]</a></sup></p>
+    <div class="kv"><span class="k">Ease of use</span><p>Best in the category. One reviewer who had hand-rolled the same thing called setup "about as far as I imagine is possible... a pretty slick experience." Desktop and iOS are the same product, not an app plus a viewer.<sup><a href="#s3">[3]</a></sup></p></div>
+    <div class="kv"><span class="k">Real reviews</span><p>A paying user's week one: three bots built, one flopped; "the first agent product I would hand to a non-technical person."<sup><a href="#s2">[2]</a></sup> A tougher review found launch bugs (bots looping at each other, a usage meter showing 48% used as 0%, GitHub auth failing on iOS) plus three structural issues: all bots share one computer with no security boundary, no model picker, no real audit log. Verdict: "an excellent demo of a product that is not yet safe to give anything important."<sup><a href="#s3">[3]</a></sup> Hacker News reaction centered on vendor trust and prompt-injection risk.<sup><a href="#s3">[3]</a></sup></p></div>
+    <div class="kv"><span class="k">Pricing</span><span style="margin:0">Messy at launch (Reddit claimed $200-300 required). Verified against xAI's page in late August: Grok Bot is included at $30/mo SuperGrok; $100 SuperGrok Plus for much higher usage; also bundled into Cursor plans from $20/mo.<sup><a href="#s1">[1]</a><a href="#s2">[2]</a></sup></span></div>
+    <div class="kv"><span class="k">Fit for you</span><p>The genuine alternative if you want an agent that drives websites with no API. But it is beta, it wants the keys to your accounts on a machine you do not control, there is no approval-gate culture like yours, and it is not in iMessage. <strong>Worth a $30 experiment month, not a switch.</strong></p></div>
+  </div>
+
+  <div class="dive">
+    <h3>Hermes Agent <span class="sub">- Nous Research</span></h3>
+    <p><span class="tag y">self-hosted</span><span class="tag y">open source (MIT)</span><span class="tag g">learning loop</span></p>
+    <p>The open-source agent that "grows with you": persistent memory, skills it writes for itself after complex tasks, a background curator that prunes them weekly, cron automations, parallel subagents, and seven execution backends from a $5 VPS to serverless sandboxes. Reachable from CLI, Telegram, Discord, Slack, WhatsApp, Signal, and email.<sup><a href="#s5">[5]</a></sup></p>
+    <div class="kv"><span class="k">Real reviews</span><p>Scored 8.4/10 (A tier) in one hands-on test: output quality 9.0, but <strong>ease of use 6.5</strong> - "you will spend a Saturday on it."<sup><a href="#s7">[7]</a></sup> Happy users are technical people automating their own world ("a sysadmin for my homelab... it's magical"); detractors call the CLI "janky, flickery" and slow to start. Note: HN threads carry plagiarism allegations against the project - context, not a usage verdict.<sup><a href="#s6">[6]</a></sup></p></div>
+    <div class="kv"><span class="k">Pricing</span><p>Software free. Reality: model APIs run ~$30-150/mo, plus a server and your maintenance time. Nous's own calculator puts "free" self-hosting near $535/mo once time is priced in. Managed FlyHermes exists but shows pricing only at signup.<sup><a href="#s6">[6]</a><a href="#s7">[7]</a></sup></p></div>
+    <div class="kv"><span class="k">Fit for you</span><p>You are technical enough to run it, and the learning loop is genuinely cool. But it is infrastructure you would maintain to get a worse version of what you already have in your pocket. A fun weekend project, not a replacement.</p></div>
+  </div>
+
+  <div class="dive">
+    <h3>OpenClaw</h3>
+    <p><span class="tag y">self-hosted</span><span class="tag y">open source</span><span class="tag b">huge community</span></p>
+    <p>The category's giant: a self-hosted gateway that puts an agent inside iMessage, WhatsApp, Telegram, Signal, Discord, Slack and more, created by Peter Steinberger, with one of the biggest communities in open source. OpenClaw 2.0 (September 1, 2026) simplified setup - it detects your existing ChatGPT and Claude subscriptions and API keys - and added shared cloud sessions.<sup><a href="#s8">[8]</a><a href="#s9">[9]</a><a href="#s10">[10]</a></sup></p>
+    <div class="kv"><span class="k">Real reviews</span><p>The honest pattern: powerful when it works, expensive in time. "$180 and 45 hours into OpenClaw. Not going back" (they meant gone, not converted).<sup><a href="#s15">[15]</a></sup> "Broke every update for a month, so I gave up and moved to Hermes."<sup><a href="#s3">[3]</a></sup> Users who love it converged on one model: build and debug automations with a coding tool, then let OpenClaw execute narrow, well-scoped skills from chat. "Give OpenClaw less room to improvise."<sup><a href="#s12">[12]</a></sup> 2.0's launch drew mixed reactions: smooth upgrades for some, broken gateways and lost automations for others.<sup><a href="#s10">[10]</a></sup></p></div>
+    <div class="kv"><span class="k">The catch</span><p>Security is on you: researchers found 42,000+ unprotected OpenClaw instances on the public internet, and nine CVEs in 2026 alone, one scored 9.9/10. A managed-hosting industry ($49-199/mo) exists purely because self-hosting it is a job.<sup><a href="#s11">[11]</a></sup></p></div>
+    <div class="kv"><span class="k">Pricing</span><p>Software free. VPS $10-30/mo plus model spend (a misconfigured loop can burn $200 in an hour), or managed hosting $49-199/mo.<sup><a href="#s11">[11]</a></sup></p></div>
+    <div class="kv"><span class="k">Fit for you</span><p>Same verdict as Hermes, more so: maximum control, maximum chores. If you ever want total data sovereignty and a tinkering outlet, it is the default choice. As your daily agent, it trades your zero-maintenance life for a pet server.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>The rest of the map</h2>
+  <ul class="tight">
+    <li><strong>ChatGPT (Agent Mode / Atlas)</strong> - best browser-native agent inside a $20/mo plan you may already pay for. Assistant-first.<sup><a href="#s13">[13]</a></sup></li>
+    <li><strong>Claude (Pro / Cowork)</strong> - strongest reasoning and writing partner; where most reviewers say their deep work still happens. $20/mo, Max at $100-200.<sup><a href="#s13">[13]</a><a href="#s2">[2]</a></sup></li>
+    <li><strong>Gemini</strong> - the pick only if your life is all-Google; its always-on Spark agent sits behind the $99.99/mo Ultra tier, US-only.<sup><a href="#s13">[13]</a></sup></li>
+    <li><strong>Manus / Genspark</strong> - autonomous research runners; free daily credits make them free to try. Complement, not replacement.<sup><a href="#s13">[13]</a></sup></li>
+    <li><strong>Lindy / alfred_</strong> - inbox specialists, if email autonomy is ever the whole job. $24.99-29.99/mo.<sup><a href="#s13">[13]</a></sup></li>
+  </ul>
+</section>
+
+<section>
+  <h2>What I'd do</h2>
+  <ol class="moves">
+    <li><strong>Keep Instinct as your agent.</strong> Your criteria - iMessage-first, zero maintenance, approval-first autonomy, long-term memory of your life, the jobs you run weekly - are exactly the shape only a managed personal agent delivers. Every alternative either makes you a sysadmin (OpenClaw, Hermes) or asks you to trust a beta with your logins and no approval culture (Grok Bot).</li>
+    <li><strong>If you want to play: one month of SuperGrok at $30 for Grok Bot.</strong> The only 2026 launch reviewers agree moved the boundary (persistent computer, teach-by-demo). Give it small, reversible tasks and no financial or sensitive accounts. If it earns trust, keep it for computer-use chores; if the beta bugs bite, cancel. You lose $30 and learn the frontier.</li>
+    <li><strong>Skip self-hosting unless you want the hobby itself.</strong> Hermes and OpenClaw are real and impressive, but every honest account prices the upkeep in weekends, and you would be rebuilding a worse version of what already texts you back. If that changes - say you want full data sovereignty - OpenClaw 2.0 on a $20 VPS is where to start.</li>
+    <li><strong>Don't stack $20 chatbots for agent features.</strong> If you already pay for ChatGPT or Claude, use their agent modes inside what you have. Buying them as agents duplicates what you get here, with less memory of you.</li>
+  </ol>
+  <div class="note">
+    Confidence notes: "Hermes" is a high-confidence read of the garbled name; if you meant something else, say so and that section gets redone. Grok Bot pricing has shifted repeatedly during beta - verify xAI's pricing page the day you buy. OpenClaw and Hermes star counts vary wildly by source and are skipped as unreliable.
+  </div>
+</section>
+
+<section>
+  <h2>Sources</h2>
+  <p class="src" id="s1"><span class="num">[1]</span> <a href="https://x.ai/bot">x.ai/bot</a> - official Grok Bot product and pricing page</p>
+  <p class="src" id="s2"><span class="num">[2]</span> <a href="https://christopheralarcon.com/blog/what-is-grok-bot">"What Is Grok Bot? I Paid for It and Ran It for a Week"</a> - christopheralarcon.com, Aug 28 2026</p>
+  <p class="src" id="s3"><span class="num">[3]</span> <a href="https://continuumcode.ai/guides/grok-bot-review/">"Grok Bot review 2026: what the beta actually does"</a> - continuumcode.ai, Aug 22 2026</p>
+  <p class="src" id="s4"><span class="num">[4]</span> <a href="https://blog.buildfastwithai.com/grok-bot-review">"Grok Bot Review: xAI's Always-On AI Teammates"</a> - buildfastwithai, Aug 13 2026</p>
+  <p class="src" id="s5"><span class="num">[5]</span> <a href="https://github.com/nousresearch/hermes-agent/">github.com/nousresearch/hermes-agent</a> - official README</p>
+  <p class="src" id="s6"><span class="num">[6]</span> <a href="https://www.eesel.ai/blog/hermes-agent-review">"Hermes AI agent review: an honest 2026 take"</a> - eesel.ai, Jul 19 2026 (vendor builds support AI; pitch noted)</p>
+  <p class="src" id="s7"><span class="num">[7]</span> <a href="https://aitooltier.com/tools/hermes-agent">"Hermes Agent Review 2026" (8.4/10)</a> - aitooltier.com, Jul 5 2026</p>
+  <p class="src" id="s8"><span class="num">[8]</span> <a href="https://docs.openclaw.ai/">docs.openclaw.ai</a> - official OpenClaw docs</p>
+  <p class="src" id="s9"><span class="num">[9]</span> <a href="https://github.com/openclaw/openclaw">github.com/openclaw/openclaw</a> - official repo</p>
+  <p class="src" id="s10"><span class="num">[10]</span> <a href="https://www.infoq.com/news/2026/09/openclaw-2-release/">"OpenClaw 2.0 Releases with Simplified Setup and Collaborative Agents"</a> - InfoQ, Sep 1 2026</p>
+  <p class="src" id="s11"><span class="num">[11]</span> <a href="https://openclawdc.com/blog/openclaw-self-hosting-risks/">"Self-Hosting OpenClaw: The Risks Nobody Talks About"</a> - openclawdc.com, Apr 2026 (sells managed hosting; bias noted)</p>
+  <p class="src" id="s12"><span class="num">[12]</span> <a href="https://standardcompute.com/blog/i-finally-understood-what-openclaw-is-good-at-after-reading-this-27-upvote-reddit-thread">"I finally understood what OpenClaw is good at..."</a> - standardcompute.com, May 2026</p>
+  <p class="src" id="s13"><span class="num">[13]</span> <a href="https://gravity.fast/blog/best-personal-ai-agents/">"Best Personal AI Agents in 2026: 9 Compared"</a> - gravity.fast, updated Aug 24 2026 (vendor; own product included with disclosure)</p>
+  <p class="src" id="s14"><span class="num">[14]</span> <a href="https://www.aifire.co/p/best-personal-ai-agents-2026-ranked-for-all-skill-levels">"Best Personal AI Agents 2026: Ranked for All Skill Levels"</a> - aifire.co, Sep 3 2026</p>
+  <p class="src" id="s15"><span class="num">[15]</span> Reddit user-sentiment snapshots via sentinel-team.org - r/openclaw threads, 2026</p>
+  <p class="src"><span class="num">[*]</span> Instinct section: grounded in the product FAQ and your own usage, not external reviews (none exist to quote).</p>
+</section>
+
+</div>
+</body>
+</html>
