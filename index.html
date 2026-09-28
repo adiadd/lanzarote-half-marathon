@@ -82,6 +82,21 @@ button.expand{all:unset;color:var(--lava);cursor:pointer;font-size:11.5px;font-w
 .ref summary{cursor:pointer;padding:14px 2px;font-weight:700;font-size:14px;list-style:none}
 .ref summary::after{content:"+";float:right;color:var(--lava)}.ref[open] summary::after{content:"−"}
 .ref-body{padding:0 2px 14px;color:var(--muted);font-size:13px}.ref-body b{color:var(--ink)}.ref-body p{margin:8px 0}
+
+/* Keep-close guidance uses the same steps, cards and quiet notes as Warm down. */
+.ref-body{padding:0 2px 16px;color:var(--muted);font-size:13px}
+.ref-intro{color:var(--muted);font-size:13px;margin:0 0 12px;max-width:56ch;line-height:1.6}
+.ref-step{display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px solid #1a241f}
+.ref-num{width:26px;height:26px;border-radius:50%;display:grid;place-content:center;background:#46b4a71a;color:var(--teal);font-size:11px;font-weight:700}
+.ref-title{color:var(--ink);font-size:14px;font-weight:700;line-height:1.4}
+.ref-copy{color:var(--muted);font-size:12.5px;line-height:1.6;margin-top:3px}
+.ref-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.ref-card{min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:13px}
+.ref-card b{display:block;color:var(--ink);font-size:13px;line-height:1.4;margin-bottom:4px}
+.ref-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+.ref-note{margin:12px 0 0;color:var(--faint);font-size:11.5px;line-height:1.6}
+.ref-card--wide{grid-column:1/-1}
+@media(max-width:430px){.ref-cards{grid-template-columns:1fr}}
 .reset{display:block;margin:30px auto 0;color:var(--faint);background:none;border:0;text-decoration:underline;cursor:pointer;padding:12px;font:inherit;font-size:13px}
 .offline{color:#ffb36b}
 @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
@@ -103,6 +118,41 @@ const lower={1:['Lift — lower · intro','Keep it light. Learn the movements an
 const upper=[['Bench press','4 × 8'],['Lat pulldown','4 × 8'],['Incline dumbbell press','3 × 8'],['Seated cable row','3 × 10'],['Cable tricep pushdown + cable curl','3 × 10 each, superset'],['Preacher curl (optional third move)','3 × 10']];
 const upperLight=[['Bench press','2 × 8'],['Lat pulldown','2 × 8'],['Incline dumbbell press','2 × 8'],['Seated cable row','2 × 10']];
 const refs=[['How the week is built','Mon rest. The extra easy miles move into Thursday. Tue quality run. Wed lift. Thu easy run. Fri upper-body lift through week 9, then rest. Saturday morning basketball, kept chill. Sunday long run. The original plan had the weekend reversed; this version is built around your Saturday hoops.'],['The lift split','<b>Wed lower:</b> back squat 4 × 8, Bulgarian split squat 3 × 8, leg curl 3 × 10, then a lateral raise + calf raise superset.<br><b>Fri upper:</b> bench 4 × 8, lat pulldown 4 × 8, incline dumbbell 3 × 8, seated cable row 3 × 10, then a cable tricep pushdown + cable curl superset with preacher curl optional. Big lifts get straight sets, accessories ride supersets at the end, ~55 min door to door.'],['Morning window','Everything on weekdays fits inside an hour. Kit, shoes, watch, and keys out the night before. Under 60 min you do not need to eat first. The actual constraint is sleep, so rest mornings count as training.'],['Warm up','3–5 min brisk walk or very slow jog. Then 10 leg swings each way, 10 walking lunges per side, hip circles, ankle rolls and calf pumps, and 30 sec each of skips or butt kicks. Do not static-stretch cold.'],['Effort, not pace','<b>Easy/long:</b> full sentences without gasping. It should feel almost embarrassingly slow.<br><b>Steady:</b> a notch up, still controlled.<br><b>Intervals:</b> hard but controlled, three or four words before you need air.<br><b>Tempo:</b> comfortably hard. You could talk; you would not want to.'],['Long-run fuel','Carry electrolytes once the long run passes an hour. Past 75 min, practise a gel or chews every 40–45 min. Use the same setup you plan to use on race day.'],['When work gets brutal','Drop in this order: Wednesday lift, Thursday run, Tuesday quality run. Protect the Sunday long run above everything. If you sleep under five hours, skip the morning session. Never cram missed work into the next week.'],['Pain rule','General soreness and heavy legs can be normal. Sharp, localised, worsening pain, or pain that changes how you run means stop and rest 2–3 days.']];
+const refContent=[
+`<div class="ref-step"><span class="ref-num">1</span><div><div class="ref-title">Mon rest.</div><div class="ref-copy">The extra easy miles move into Thursday.</div></div></div>
+<div class="ref-step"><span class="ref-num">2</span><div><div class="ref-title">Tue quality run.</div></div></div>
+<div class="ref-step"><span class="ref-num">3</span><div><div class="ref-title">Wed lift.</div></div></div>
+<div class="ref-step"><span class="ref-num">4</span><div><div class="ref-title">Thu easy run.</div></div></div>
+<div class="ref-step"><span class="ref-num">5</span><div><div class="ref-title">Fri upper-body lift through week 9, then rest.</div></div></div>
+<div class="ref-step"><span class="ref-num">6</span><div><div class="ref-title">Saturday morning basketball, kept chill.</div></div></div>
+<div class="ref-step"><span class="ref-num">7</span><div><div class="ref-title">Sunday long run.</div></div></div>
+<p class="ref-note">The original plan had the weekend reversed; this version is built around your Saturday hoops.</p>`,
+`<div class="ref-cards"><div class="ref-card"><b>Wed lower:</b><p>back squat 4 × 8, Bulgarian split squat 3 × 8, leg curl 3 × 10, then a lateral raise + calf raise superset.</p></div>
+<div class="ref-card"><b>Fri upper:</b><p>bench 4 × 8, lat pulldown 4 × 8, incline dumbbell 3 × 8, seated cable row 3 × 10, then a cable tricep pushdown + cable curl superset with preacher curl optional.</p></div></div>
+<p class="ref-note">Big lifts get straight sets, accessories ride supersets at the end, ~55 min door to door.</p>`,
+`<p class="ref-intro">Everything on weekdays fits inside an hour.</p>
+<div class="ref-step"><span class="ref-num">1</span><div><div class="ref-title">Kit, shoes, watch, and keys out the night before.</div></div></div>
+<div class="ref-step"><span class="ref-num">2</span><div><div class="ref-title">Under 60 min you do not need to eat first.</div></div></div>
+<p class="ref-note">The actual constraint is sleep, so rest mornings count as training.</p>`,
+`<div class="ref-step"><span class="ref-num">1</span><div><div class="ref-title">3–5 min brisk walk or very slow jog.</div></div></div>
+<div class="ref-step"><span class="ref-num">2</span><div><div class="ref-title">Then 10 leg swings each way, 10 walking lunges per side, hip circles, ankle rolls and calf pumps, and 30 sec each of skips or butt kicks.</div></div></div>
+<p class="ref-note">Do not static-stretch cold.</p>`,
+`<div class="ref-cards"><div class="ref-card"><b>Easy/long:</b><p>full sentences without gasping. It should feel almost embarrassingly slow.</p></div>
+<div class="ref-card"><b>Steady:</b><p>a notch up, still controlled.</p></div>
+<div class="ref-card"><b>Intervals:</b><p>hard but controlled, three or four words before you need air.</p></div>
+<div class="ref-card"><b>Tempo:</b><p>comfortably hard. You could talk; you would not want to.</p></div></div>`,
+`<div class="ref-step"><span class="ref-num">1</span><div><div class="ref-title">Carry electrolytes once the long run passes an hour.</div></div></div>
+<div class="ref-step"><span class="ref-num">2</span><div><div class="ref-title">Past 75 min, practise a gel or chews every 40–45 min.</div></div></div>
+<p class="ref-note">Use the same setup you plan to use on race day.</p>`,
+`<p class="ref-intro">Drop in this order:</p>
+<div class="ref-step"><span class="ref-num">1</span><div><div class="ref-title">Wednesday lift,</div></div></div>
+<div class="ref-step"><span class="ref-num">2</span><div><div class="ref-title">Thursday run,</div></div></div>
+<div class="ref-step"><span class="ref-num">3</span><div><div class="ref-title">Tuesday quality run.</div></div></div>
+<div class="ref-cards"><div class="ref-card"><p>Protect the Sunday long run above everything.</p></div><div class="ref-card"><p>If you sleep under five hours, skip the morning session.</p></div></div>
+<p class="ref-note">Never cram missed work into the next week.</p>`,
+`<div class="ref-cards"><div class="ref-card"><p>General soreness and heavy legs can be normal.</p></div>
+<div class="ref-card"><p>Sharp, localised, worsening pain, or pain that changes how you run means stop and rest 2–3 days.</p></div></div>`
+];
 const rwPrep=[['Kit laid out, bib pinned the night before'],['Watch and phone charged'],['Gels or chews packed — the same ones you trained with'],['Breakfast 2–3 hours before the gun, nothing new'],['Electrolytes in the morning'],['First three miles slower than feels right']];
 let done=new Set(); let saveTimer;
 const DAYS=['mon','tue','wed','thu','fri','sat','sun'];
@@ -183,7 +233,7 @@ el.innerHTML=`Strava ✓${added?` · ${added} session${added>1?'s':''} auto-chec
 document.getElementById('strava-disc').onclick=async()=>{if(!confirm('Disconnect Strava? Auto-check will stop.'))return;try{await fetch(API+'/strava/disconnect',{method:'POST'})}catch{}el.innerHTML='<a href="'+API+'/strava/connect">connect Strava</a>'}
 }catch{if(!el.textContent)el.textContent='Strava connected'}}
 days.textContent=Math.max(0,Math.ceil((RACE-new Date())/86400000));
-document.getElementById('refs').innerHTML=refs.map(x=>`<details class="ref"><summary>${x[0]}</summary><div class="ref-body"><p>${x[1]}</p></div></details>`).join('');
+document.getElementById('refs').innerHTML=refs.map((x,i)=>`<details class="ref"><summary>${x[0]}</summary><div class="ref-body">${refContent[i]}</div></details>`).join('');
 reset.onclick=()=>{if(confirm('Clear every completed workout?')){done=new Set(['week-1-skipped','week-2-skipped']);render();queueSave()}};
 load();
 </script></body></html>
